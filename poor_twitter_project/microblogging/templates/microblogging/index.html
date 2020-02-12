@@ -1,0 +1,28 @@
+{% extends "microblogging/base.html" %}
+
+{% block content %}
+    <h2>Poor Man's Twitter</h2>
+	<div id="app"> 
+        <h3>Send tweet</h3>
+        <input placeholder="Name" v-model="name">
+        <input placeholder="Message" v-model="message">
+        <button type="submit" @click="save">Send Tweet</button>
+
+        <h4 v-if="result_message.length">Result: %{ result_message }</h4>
+
+        <h3>Tweets List:</h3>
+        <div id="tweets_list" v-if="tweets.length">
+            <table class="table">
+                <thead><th>Name</th><th>Message</th><th>Time</th></thead>
+                <tr v-for="tweet in tweets" :key="tweet.id">
+                    <td><strong>%{ tweet.name }</strong></td>
+                    <td>%{ tweet.message }</td>
+                    <td><i>%{ tweet.time }</i></td>
+                </tr>
+            </table>
+        </div>
+        <div v-else>
+            <h3>There aren't tweets yet</h3>
+        </div>
+    </div>
+{% endblock %}
